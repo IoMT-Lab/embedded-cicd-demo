@@ -1,0 +1,15 @@
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -60,11 +60,7 @@
+ 
+ uint16_t get_measurement(BOOL should_delay)
+ {
+-    if (should_delay == TRUE)
+-    {
+-        HAL_Delay(100);
+-    }
+-
++    HAL_Delay(100);
+     if (PD_Get_Valid() == TRUE)
+     {
+         return PD_Get_Value();

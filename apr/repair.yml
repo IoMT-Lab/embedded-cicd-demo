@@ -1,0 +1,59 @@
+version: '1.0'
+seed: 0
+threads: 1
+
+# provides information about the program under repair, including
+# the name of the Docker image that is used to provide it, the
+# location of the source code for the program within that image,
+# and instructions for building and testing it.
+program:
+  image: embedded:latest
+  language: c
+  source-directory: /source
+  build-instructions:
+    time-limit: 10
+    steps:
+      - cmake --build .
+      - python3 /opt/controller/programmer.py -s 002C001E3233510D39363634 -p /dev/ttyACM0 -w /source/P3.elf
+    steps-for-coverage:
+      - cmake --build .
+  tests:
+    type: genprog
+    workdir: /source
+    number-of-failing-tests: 1
+    number-of-passing-tests: 8
+    time-limit: 5
+
+# specifies the method/tool that should be used to obtain coverage for
+# the program.
+coverage:
+  method:
+    type: gcov
+  load-from-file: ../p3/coverage.yml
+
+localization:
+  type: spectrum
+  metric: tarantula
+  restrict-to-files:
+    - Src/app/app.c
+    - Src/app/as7341.c
+
+algorithm:
+  type: exhaustive
+
+transformations:
+  schemas:
+  - type: delete-statement
+  - type: replace-statement
+  - type: prepend-statement
+
+optimizations:
+  ignore-equivalent-insertions: yes
+  ignore-dead-code: yes
+  ignore-string-equivalent-snippets: yes
+  ignore-untyped-returns: yes
+
+# places a limit on the resources (e.g., wall-clock time, test executions,
+# candidate patches) that may be consumed during the search for a repair.
+resource-limits:
+  candidates: 1000

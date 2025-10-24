@@ -10,12 +10,17 @@
 #define REG_ID 0x92
 #define REG_INTENAB 0xF9
 #define REG_STAT 0x71
+#define REG_STATUS 0x93
 #define REG_STATUS2 0xA3
 #define REG_STATUS3 0xA4
+#define REG_STATUS5 0xA6
 #define REG_STATUS6 0xA7
+#define REG_FD_STATUS 0xDB
+#define REG_CFG3 0xAC
 #define REG_CH0_DATA_L 0x95
 #define REG_SP_TH_L_LSB 0x84
 #define REG_SP_TH_H_LSB 0x86
+#define REG_CONTROL 0xFA
 
 I2C_HandleTypeDef *hi2c;
 
@@ -175,4 +180,31 @@ uint16_t PD_Get_HighThreshold()
 uint16_t PD_Get_Value()
 {
     return read_double_register(REG_CH0_DATA_L);
+}
+
+void PD_enable_sleep_after_interrupt()
+{
+    write_register(REG_CFG0, 0b00010000);
+    write_register(REG_CFG3, 0b00010000);
+    write_register(REG_CFG0, 0b00000000);
+}
+
+void PD_disable_sleep_after_interrupt()
+{
+    write_register(REG_CFG0, 0b00010000);
+    write_register(REG_CFG3, 0b00000000);
+    write_register(REG_CFG0, 0b00000000);
+}
+
+void PD_clear_interrupts()
+{
+    write_register(REG_CFG0, 0b00010000);
+    read_register(REG_STATUS);
+    read_register(REG_STATUS2);
+    read_register(REG_STATUS3);
+    read_register(REG_STATUS5);
+    read_register(REG_STATUS6);
+    read_register(REG_FD_STATUS);
+    write_register(REG_CONTROL, 0b00000001);
+    write_register(REG_CFG0, 0b00000000);
 }

@@ -15,13 +15,13 @@ number=$(( $number - 1))
 
 if [ "$prefix" = "n" ]
 then
-    number=8
+    number=9
 fi
 
 temp="$(mktemp)"
 echo $temp
 
-python3 /opt/controller/programmer.py -s 002C001E3233510D39363634 -p /dev/ttyACM0 -t $number > ${temp}; command_status=$?
+python3 /opt/controller/programmer.py -t $number > ${temp}; command_status=$?
 grep -q "PASS\|IGNORE" ${temp}; pass_status=$?
 grep -q FAIL\|UNKNOWN ${temp}; fail_status=$?
 

@@ -34,20 +34,18 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 # Enable CMake support for ASM and C languages
 enable_language(C ASM)
 
+add_compile_options(-Werror -Wno-incompatible-pointer-types)  # Treat warnings as errors
+
+set(TEST_EXECUTABLE ${CMAKE_PROJECT_NAME}_unit_tests)
+
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME})
+add_executable(${TEST_EXECUTABLE})
 
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
-# Link directories setup
-target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user defined library search paths
-)
-
-# Add sources to executable
-target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user sources here
+set(SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/Src/utils/serial.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Src/utils/test_harness.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Src/app/app.c
@@ -55,14 +53,20 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Src/testing/tests.c
 )
 
-# Add include paths
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+set(INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/Inc/system
-    # Add user defined include paths
 )
 
+# Add sources to executable
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${SOURCE})
+target_sources(${TEST_EXECUTABLE} PRIVATE ${SOURCE})
+
+# Add include paths
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${INCLUDES})
+target_include_directories(${TEST_EXECUTABLE} PRIVATE ${INCLUDES})
+
 # Add project symbols (macros)
-target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
+target_compile_definitions(${TEST_EXECUTABLE} PRIVATE
     UNIT_TESTING
     # Add user defined symbols
 )
@@ -71,8 +75,6 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 
 # Add linked libraries
-target_link_libraries(${CMAKE_PROJECT_NAME}
-    stm32cubemx
+target_link_libraries(${CMAKE_PROJECT_NAME} stm32cubemx)
+target_link_libraries(${TEST_EXECUTABLE} stm32cubemx)
 
-    # Add user defined libraries
-)

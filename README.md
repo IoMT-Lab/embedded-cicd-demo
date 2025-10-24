@@ -71,25 +71,7 @@ The unit tests themselves are found under `Src/testing/`
 
 `coverage.yml` is a code coverage file that has been built by hand to provide additional information about the unit tests to Darjeeling.
 
-#### build_docker.sh
+#### scripts/build_docker.sh
 
 This script builds the relevant images that are needed by Darjeeling.
 It should only need to be run once
-
-
-### Running it yourself
-
-Assuming you have the correct hardware device (and it is wired correctly), this whole process can be replicated without much hassle.
-The system can currently only run on a Linux host, due to how the communication bridging is configured.
-Once the hardware device is connected to the system, it should show up as a serial device at `/dev/ttyACM0`.
-If the serial device path is different, the path will need to be updated on line 17 of `repair.yml`
-You will also need to update the serial number of the Nucleo / ST-Link on line 17 of `repair.yml`
-With that in place, the follow steps will run the evaluation:
-
-- `./build_docker.sh`
-- `cd apr/darjeeling`
-- `pipenv install`
-- `pipenv run darjeeling repair ../repair.yml`
-
-The process will take a substantial amount of time -- roughly 17 minutes -- to find a candidate patch.
-But while patches are being evaluated, there should be flashing lights.

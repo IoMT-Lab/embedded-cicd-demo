@@ -6,6 +6,8 @@ from parse import parse
 import argparse
 
 PROGRAMMER_PATH=os.getenv('STM32_PROGRAMMER')
+SWD_SN = os.getenv('STM32_SWD_SN')
+SERIAL_PORT = os.getenv('SERIAL_PORT')
 
 BUFFER_SIZE=16
 class DeviceSerial():
@@ -76,8 +78,8 @@ class Device():
 
 def main():
     parser = argparse.ArgumentParser(prog='Programmer', description='')
-    parser.add_argument('-s', '--serial_number', required=True)
-    parser.add_argument('-p', '--port', required=True)
+    parser.add_argument('-s', '--serial_number', default=SWD_SN)
+    parser.add_argument('-p', '--port', default=SERIAL_PORT)
 
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-w', '--write', type=pathlib.Path)
@@ -90,6 +92,7 @@ def main():
         device.reset()
         device.erase()
         device.flash(args.write)
+        device.reset()
     
     if args.test is not None:
         device.reset()

@@ -26,4 +26,10 @@ WORKDIR /opt/controller
 COPY p3 /source
 WORKDIR /source
 
+COPY docker/binaries /binaries
+COPY docker/scripts /scripts
+
+ENV STM32_SWD_SN=002C001E3233510D39363634
+ENV SERIAL_PORT=/dev/ttyACM0
+
 RUN cmake .

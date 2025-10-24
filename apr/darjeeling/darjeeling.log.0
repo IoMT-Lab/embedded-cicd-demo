@@ -1,0 +1,2412 @@
+2025-10-24 11:04:36.360 | INFO     | darjeeling.resources:from_dict:70 - parsing resource limits: {'candidates': 1000}
+2025-10-24 11:04:36.360 | TRACE    | darjeeling.coverage.gcov:from_dict:119 - gcov config: GCovCollectorConfig(files_to_instrument=frozenset())
+2025-10-24 11:04:36.360 | INFO     | darjeeling.cli:repair:201 - using configuration: Config(dir_patches='/home/taylor/workspace/vanderbilt/projects/balam-d/embedded-cicd-demo/apr/patches', program=ProgramDescriptionConfig(image='embedded:latest', language=<Language.C: 'c'>, build_instructions=BuildInstructions(steps=(BuildStep(command='cmake --build .', directory='/source'), BuildStep(command='python3 /opt/controller/programmer.py -w /source/P3_unit_tests.elf', directory='/source')), time_limit=10), build_instructions_for_coverage=BuildInstructions(steps=(BuildStep(command='cmake --build .', directory='/source'),), time_limit=10), tests=GenProgTestSuiteConfig(workdir='/source', number_failing_tests=1, number_passing_tests=9, time_limit_seconds=5), source_directory='/source', snapshot=None), transformations=ProgramTransformationsConfig(schemas=(<darjeeling.transformation.classic.delete.DeleteStatementSchemaConfig object at 0x7aaac6f03c20>, ReplaceStatementSchemaConfig(preserve_indentation=True), PrependStatementSchemaConfig(preserve_indentation=True), AppendStatementSchemaConfig(preserve_indentation=True))), localization=LocalizationConfig(metric='tarantula', exclude_files=[], exclude_lines=set(), restrict_to_files=['Src/app/app.c', 'Src/app/as7341.c'], restrict_to_lines=None), search=ExhaustiveSearcherConfig(), coverage=CoverageConfig(collector_config=GCovCollectorConfig(files_to_instrument=frozenset()), restrict_to_files=None, restrict_to_lines=None, load_from_file='/home/taylor/workspace/vanderbilt/projects/balam-d/embedded-cicd-demo/apr/../p3/coverage.yml'), resource_limits=ResourceLimits(limits=[CandidateLimit(max_candidates=1000)]), seed=0, optimizations=OptimizationsConfig(use_scope_checking=True, use_syntax_scope_checking=True, ignore_dead_code=True, ignore_equivalent_insertions=True, ignore_untyped_returns=True, ignore_string_equivalent_snippets=True, ignore_decls=True, only_insert_executed_code=True), terminate_early=True, threads=1, run_redundant_tests=False)
+2025-10-24 11:04:36.376 | DEBUG    | darjeeling.session:from_config:79 - preparing patch directory
+2025-10-24 11:04:36.376 | WARNING  | darjeeling.session:from_config:82 - clearing existing patch directory
+2025-10-24 11:04:36.377 | DEBUG    | darjeeling.session:from_config:86 - prepared patch directory
+2025-10-24 11:04:36.377 | INFO     | darjeeling.session:from_config:89 - ensuring that kaskara installation is complete (this may take 20 minutes if Kaskara is not up-to-date)
+2025-10-24 11:04:36.377 | INFO     | kaskara.post_install:post_install:10 - performing post-installation of Kaskara
+2025-10-24 11:04:36.377 | INFO     | kaskara.clang.post_install:post_install:31 - installing C++ plugin backend
+2025-10-24 11:04:36.379 | TRACE    | kaskara.clang.post_install:post_install:34 - backend located at: /home/taylor/workspace/vanderbilt/projects/balam-d/embedded-cicd-demo/apr/darjeeling/Kaskara-master/src/kaskara/clang/backend
+2025-10-24 11:04:36.394 | TRACE    | kaskara.clang.post_install:post_install:37 - prepared Docker client for C++ backend installation
+2025-10-24 11:04:36.477 | INFO     | kaskara.clang.post_install:post_install:58 - found C++ plugin Docker volume
+2025-10-24 11:04:36.477 | INFO     | kaskara.clang.post_install:post_install:89 - installed C++ plugin backend
+2025-10-24 11:04:36.477 | INFO     | kaskara.post_install:post_install:12 - completed post-installation of Kaskara
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:92 - ensured that kaskara installation is complete
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:98 - using 1 threads
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:99 - using language: c
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:100 - using optimizations: OptimizationsConfig(use_scope_checking=True, use_syntax_scope_checking=True, ignore_dead_code=True, ignore_equivalent_insertions=True, ignore_untyped_returns=True, ignore_string_equivalent_snippets=True, ignore_decls=True, only_insert_executed_code=True)
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:101 - using coverage config: CoverageConfig(collector_config=GCovCollectorConfig(files_to_instrument=frozenset()), restrict_to_files=None, restrict_to_lines=None, load_from_file='/home/taylor/workspace/vanderbilt/projects/balam-d/embedded-cicd-demo/apr/../p3/coverage.yml')
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:102 - running redundant tests? False
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:103 - using random number generator seed: 0
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:108 - search will terminate when an acceptable patch has been discovered
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:112 - resource limits:
+* maximum number of candidate patch evaluations: 1000
+2025-10-24 11:04:36.477 | DEBUG    | darjeeling.session:from_config:115 - building program...
+2025-10-24 11:04:36.477 | DEBUG    | darjeeling.session:from_config:117 - built program: ProgramDescription(_environment=Environment(_bugzoo=None, _contexts=<contextlib.ExitStack object at 0x7aaac6eb7d70>, comby=CombyBinary(location='comby', language='.c'), docker_url='unix://var/run/docker.sock', dockerblade=DockerDaemon(url='unix://var/run/docker.sock')), image='embedded:latest', language=<Language.C: 'c'>, snapshot=None, build_instructions=BuildInstructions(steps=(BuildStep(command='cmake --build .', directory='/source'), BuildStep(command='python3 /opt/controller/programmer.py -w /source/P3_unit_tests.elf', directory='/source')), time_limit=10), build_instructions_for_coverage=BuildInstructions(steps=(BuildStep(command='cmake --build .', directory='/source'),), time_limit=10), tests=<darjeeling.test.genprog.GenProgTestSuite object at 0x7aaac73bb620>, source_directory='/source')
+2025-10-24 11:04:36.477 | INFO     | darjeeling.session:from_config:120 - computing coverage information...
+2025-10-24 11:04:36.477 | INFO     | darjeeling.coverage.config:build:106 - loading coverage from file: /home/taylor/workspace/vanderbilt/projects/balam-d/embedded-cicd-demo/apr/../p3/coverage.yml
+2025-10-24 11:04:36.480 | INFO     | darjeeling.session:from_config:122 - computed coverage information
+2025-10-24 11:04:36.480 | DEBUG    | darjeeling.session:from_config:123 - coverage: {
+  n1 [FAIL]: {
+    Src/app/app.c: 69..80; 82; 84; 88
+  }
+  p1 [PASS]: {
+    
+  }
+  p2 [PASS]: {
+    
+  }
+  p3 [PASS]: {
+    Src/app/app.c: 14..21
+  }
+  p4 [PASS]: {
+    
+  }
+  p5 [PASS]: {
+    
+  }
+  p6 [PASS]: {
+    
+  }
+  p7 [PASS]: {
+    
+  }
+  p8 [PASS]: {
+    
+  }
+  p9 [PASS]: {
+    Src/app/app.c: 69..75; 80; 82; 84; 86
+  }
+}
+2025-10-24 11:04:36.480 | INFO     | darjeeling.session:from_config:126 - computing fault localization...
+2025-10-24 11:04:36.480 | INFO     | darjeeling.localization:from_config:154 - supported suspiciousness metrics: genprog, weighted, tarantula, ochiai, jaccard, ample
+2025-10-24 11:04:36.480 | INFO     | darjeeling.localization:from_config:160 - using suspiciousness metric: tarantula
+2025-10-24 11:04:36.480 | TRACE    | darjeeling.spectra:from_coverage:67 - computed spectra: LINE: (ep, ef, np, nf)
+Src/app/app.c:69: (1, 1, 8, 0)
+Src/app/app.c:70: (1, 1, 8, 0)
+Src/app/app.c:71: (1, 1, 8, 0)
+Src/app/app.c:72: (1, 1, 8, 0)
+Src/app/app.c:73: (1, 1, 8, 0)
+Src/app/app.c:74: (1, 1, 8, 0)
+Src/app/app.c:75: (1, 1, 8, 0)
+Src/app/app.c:76: (0, 1, 9, 0)
+Src/app/app.c:77: (0, 1, 9, 0)
+Src/app/app.c:14: (1, 0, 8, 1)
+Src/app/app.c:15: (1, 0, 8, 1)
+Src/app/app.c:16: (1, 0, 8, 1)
+Src/app/app.c:17: (1, 0, 8, 1)
+Src/app/app.c:18: (1, 0, 8, 1)
+Src/app/app.c:19: (1, 0, 8, 1)
+Src/app/app.c:20: (1, 0, 8, 1)
+Src/app/app.c:21: (1, 0, 8, 1)
+Src/app/app.c:78: (0, 1, 9, 0)
+Src/app/app.c:79: (0, 1, 9, 0)
+Src/app/app.c:80: (1, 1, 8, 0)
+Src/app/app.c:82: (1, 1, 8, 0)
+Src/app/app.c:84: (1, 1, 8, 0)
+Src/app/app.c:86: (1, 0, 8, 1)
+Src/app/app.c:88: (0, 1, 9, 0)
+2025-10-24 11:04:36.480 | TRACE    | darjeeling.localization:from_config:163 - excluding files from localization: []
+2025-10-24 11:04:36.480 | TRACE    | darjeeling.localization:from_config:165 - excluding lines from localization: set()
+2025-10-24 11:04:36.480 | INFO     | darjeeling.session:from_config:129 - computed fault localization:
+Localization(
+  Src/app/app.c:69: 0.90;
+  Src/app/app.c:70: 0.90;
+  Src/app/app.c:71: 0.90;
+  Src/app/app.c:72: 0.90;
+  Src/app/app.c:73: 0.90;
+  Src/app/app.c:74: 0.90;
+  Src/app/app.c:75: 0.90;
+  Src/app/app.c:76: 1.00;
+  Src/app/app.c:77: 1.00;
+  Src/app/app.c:78: 1.00;
+  Src/app/app.c:79: 1.00;
+  Src/app/app.c:80: 0.90;
+  Src/app/app.c:82: 0.90;
+  Src/app/app.c:84: 0.90;
+  Src/app/app.c:88: 1.00)
+2025-10-24 11:04:36.959 | DEBUG    | kaskara.clang.analyser:_execute_command:85 - executing loops [/source]: /opt/kaskara/scripts/kaskara-clang loops Src/app/app.c 2>&1
+2025-10-24 11:04:37.098 | DEBUG    | kaskara.clang.analyser:_execute_command:99 - loops output:
+indexing loops...
+[0;1;31merror: [0m[1munsupported option '-mcpu=' for target 'x86_64-unknown-linux-gnu'[0m
+In file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2506:13: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2506 |   SET_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:161:33: [0m[0;1;36mnote: [0mexpanded from macro 'SET_BIT'[0m
+  161 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2539:15: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2539 |   CLEAR_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:163:33: [0m[0;1;36mnote: [0mexpanded from macro 'CLEAR_BIT'[0m
+  163 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2570:23: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2570 |   return ((READ_BIT(*((__IO uint32_t *)GPIO), GPIONumber) == (GPIONumber)) ? 1UL : 0UL);[0m
+      | [0;1;32m           ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:165:33: [0m[0;1;36mnote: [0mexpanded from macro 'READ_BIT'[0m
+  165 | #define READ_BIT(REG, BIT)    ((REG) & (BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2603:15: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2603 |   CLEAR_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:163:33: [0m[0;1;36mnote: [0mexpanded from macro 'CLEAR_BIT'[0m
+  163 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))[0m
+      | [0;1;32m                                ^~~
+[0m4 errors generated.
+Error while processing /source/Src/app/app.c.
+[0;1;31merror: [0m[1munsupported option '-mcpu=' for target 'x86_64-unknown-linux-gnu'[0m
+In file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2506:13: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2506 |   SET_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:161:33: [0m[0;1;36mnote: [0mexpanded from macro 'SET_BIT'[0m
+  161 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2539:15: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2539 |   CLEAR_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:163:33: [0m[0;1;36mnote: [0mexpanded from macro 'CLEAR_BIT'[0m
+  163 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2570:23: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2570 |   return ((READ_BIT(*((__IO uint32_t *)GPIO), GPIONumber) == (GPIONumber)) ? 1UL : 0UL);[0m
+      | [0;1;32m           ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:165:33: [0m[0;1;36mnote: [0mexpanded from macro 'READ_BIT'[0m
+  165 | #define READ_BIT(REG, BIT)    ((REG) & (BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2603:15: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2603 |   CLEAR_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:163:33: [0m[0;1;36mnote: [0mexpanded from macro 'CLEAR_BIT'[0m
+  163 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))[0m
+      | [0;1;32m                                ^~~
+[0m4 errors generated.
+Error while processing /source/Src/app/app.c.
+2025-10-24 11:04:37.229 | DEBUG    | kaskara.clang.analyser:_read_loops_from_jsn:159 - finished reading loop analysis results
+2025-10-24 11:04:37.284 | DEBUG    | kaskara.clang.analyser:_execute_command:85 - executing functions [/source]: /opt/kaskara/scripts/kaskara-clang functions Src/app/app.c 2>&1
+2025-10-24 11:04:37.420 | DEBUG    | kaskara.clang.analyser:_execute_command:99 - functions output:
+indexing functions...
+[0;1;31merror: [0m[1munsupported option '-mcpu=' for target 'x86_64-unknown-linux-gnu'[0m
+In file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2506:13: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2506 |   SET_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:161:33: [0m[0;1;36mnote: [0mexpanded from macro 'SET_BIT'[0m
+  161 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2539:15: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2539 |   CLEAR_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:163:33: [0m[0;1;36mnote: [0mexpanded from macro 'CLEAR_BIT'[0m
+  163 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2570:23: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2570 |   return ((READ_BIT(*((__IO uint32_t *)GPIO), GPIONumber) == (GPIONumber)) ? 1UL : 0UL);[0m
+      | [0;1;32m           ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:165:33: [0m[0;1;36mnote: [0mexpanded from macro 'READ_BIT'[0m
+  165 | #define READ_BIT(REG, BIT)    ((REG) & (BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2603:15: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2603 |   CLEAR_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:163:33: [0m[0;1;36mnote: [0mexpanded from macro 'CLEAR_BIT'[0m
+  163 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))[0m
+      | [0;1;32m                                ^~~
+[0m4 errors generated.
+Error while processing /source/Src/app/app.c.
+[0;1;31merror: [0m[1munsupported option '-mcpu=' for target 'x86_64-unknown-linux-gnu'[0m
+In file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2506:13: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2506 |   SET_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:161:33: [0m[0;1;36mnote: [0mexpanded from macro 'SET_BIT'[0m
+  161 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2539:15: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2539 |   CLEAR_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:163:33: [0m[0;1;36mnote: [0mexpanded from macro 'CLEAR_BIT'[0m
+  163 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2570:23: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2570 |   return ((READ_BIT(*((__IO uint32_t *)GPIO), GPIONumber) == (GPIONumber)) ? 1UL : 0UL);[0m
+      | [0;1;32m           ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:165:33: [0m[0;1;36mnote: [0mexpanded from macro 'READ_BIT'[0m
+  165 | #define READ_BIT(REG, BIT)    ((REG) & (BIT))[0m
+      | [0;1;32m                                ^~~
+[0mIn file included from /source/Src/app/app.c:1:
+In file included from /source/cmake/stm32cubemx/../../Inc/app/app.h:4:
+In file included from /source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:225:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal.h:29:
+In file included from /source/Inc/system/stm32wb0x_hal_conf.h:231:
+In file included from /source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_hal_pwr.h:31:
+[1m/source/cmake/stm32cubemx/../../Drivers/STM32WB0x_HAL_Driver/Inc/stm32wb0x_ll_pwr.h:2603:15: [0m[0;1;31merror: [0m[1mcast to 'volatile uint32_t *' (aka 'volatile unsigned int *') from smaller integer type 'uint32_t' (aka 'unsigned int') [-Werror,-Wint-to-pointer-cast][0m
+ 2603 |   CLEAR_BIT(*((__IO uint32_t *)GPIO), GPIONumber);[0m
+      | [0;1;32m  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[1m/source/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32WB0X/Include/stm32wb0x.h:163:33: [0m[0;1;36mnote: [0mexpanded from macro 'CLEAR_BIT'[0m
+  163 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))[0m
+      | [0;1;32m                                ^~~
+[0m4 errors generated.
+Error while processing /source/Src/app/app.c.
+2025-10-24 11:04:37.568 | DEBUG    | kaskara.clang.analyser:_find_statements:119 - finding statements for project: Project(image='embedded:latest', directory='/source', files=frozenset({'Src/app/app.c'}), ignore_errors=True)
+2025-10-24 11:04:37.628 | DEBUG    | kaskara.clang.analyser:_execute_command:85 - executing statements [/source]: /opt/kaskara/scripts/kaskara-clang statements Src/app/app.c 2>&1
+2025-10-24 11:04:37.760 | DEBUG    | kaskara.clang.analyser:_execute_command:99 - statements output:
+indexing statements...
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='uint8_t aux_id = PD_Get_AuxID();\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=18, column=4), stop=Location(line=18, column=37))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='uint8_t rev_id = PD_Get_RevID();\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=19, column=4), stop=Location(line=19, column=37))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='uint8_t id = PD_Get_ID();\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=20, column=4), stop=Location(line=20, column=30))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='return (aux_id == EXPECTED_AUX_ID) && (rev_id == EXPECTED_REV_ID) && (id == EXPECTED_ID);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=22, column=4), stop=Location(line=22, column=93))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='interrupts = enable_waiting;', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=27, column=4), stop=Location(line=27, column=32))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_I2c_Init(get_i2c());', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=29, column=4), stop=Location(line=29, column=27))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_Power_Off();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=30, column=4), stop=Location(line=30, column=19))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='HAL_Delay(10);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=31, column=4), stop=Location(line=31, column=18))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_Power_On();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=32, column=4), stop=Location(line=32, column=18))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='while (PD_Get_IntBusy() == TRUE)\n    {\n    }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=35, column=4), stop=Location(line=37, column=6))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='if (check_identifiers() == FALSE)\n    {\n        // Error\n    }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=39, column=4), stop=Location(line=42, column=6))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_Initialize_LED();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=44, column=4), stop=Location(line=44, column=24))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_enable_sleep_after_interrupt();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=45, column=4), stop=Location(line=45, column=38))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='if (enable_waiting == TRUE)\n    {\n        PD_Set_LowThreshold(low_threshold);\n        PD_Set_HighThreshold(high_threshold);\n        PD_Enable_Interrupt();\n    }\n    else\n    {\n        PD_Disable_Interrupt();\n    }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=47, column=4), stop=Location(line=56, column=6))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_Set_LowThreshold(low_threshold);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=49, column=8), stop=Location(line=49, column=43))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_Set_HighThreshold(high_threshold);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=50, column=8), stop=Location(line=50, column=45))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_Enable_Interrupt();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=51, column=8), stop=Location(line=51, column=30))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_Disable_Interrupt();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=55, column=8), stop=Location(line=55, column=31))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_Measurement_Enable();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=58, column=4), stop=Location(line=58, column=28))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='HAL_Delay(500);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=59, column=4), stop=Location(line=59, column=19))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='reset();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=61, column=4), stop=Location(line=61, column=12))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_LED_On();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=66, column=4), stop=Location(line=66, column=16))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='HAL_Delay(100);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=67, column=4), stop=Location(line=67, column=19))))
+2025-10-24 11:04:37.877 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_LED_Off();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=68, column=4), stop=Location(line=68, column=17))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='if (PD_Get_Valid() == TRUE)\n    {\n        (*data) = PD_Get_Value();\n        return TRUE;\n    }\n    else\n    {\n        return FALSE;\n    }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=73, column=4), stop=Location(line=81, column=6))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='(*data) = PD_Get_Value();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=75, column=8), stop=Location(line=75, column=33))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='return TRUE;', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=76, column=8), stop=Location(line=76, column=20))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='return FALSE;', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=80, column=8), stop=Location(line=80, column=21))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='if (interrupts)\n    {\n        PD_clear_interrupts();\n    }\n    else\n    {\n    }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=86, column=4), stop=Location(line=92, column=6))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='PD_clear_interrupts();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=88, column=8), stop=Location(line=88, column=30))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='HAL_Delay(10);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=97, column=4), stop=Location(line=97, column=18))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='while ((PD_Get_LowInterrupt() == FALSE) && (PD_Get_HighInterrupt() == FALSE))\n    {\n        HAL_Delay(INTERRUPT_WAIT_MS);\n    }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=98, column=4), stop=Location(line=101, column=6))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='HAL_Delay(INTERRUPT_WAIT_MS);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=100, column=8), stop=Location(line=100, column=37))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='uint16_t measurement = 0;\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=106, column=4), stop=Location(line=106, column=30))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='device_initialization(ENABLE_WAITING, LOW_THRESHOLD, HIGH_THRESHOLD);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=107, column=4), stop=Location(line=107, column=73))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='while (1)\n    {\n        if (ENABLE_WAITING)\n        {\n            wait_for_measurement();\n        }\n        else\n        {\n            HAL_Delay(POLL_WAIT_MS);\n        }\n\n        if (get_measurement(&measurement) == TRUE && measurement < 10)\n        {\n\n            pulse();\n        }\n\n        reset();\n    }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=108, column=4), stop=Location(line=126, column=6))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='if (ENABLE_WAITING)\n        {\n            wait_for_measurement();\n        }\n        else\n        {\n            HAL_Delay(POLL_WAIT_MS);\n        }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=110, column=8), stop=Location(line=117, column=10))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='wait_for_measurement();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=112, column=12), stop=Location(line=112, column=35))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='HAL_Delay(POLL_WAIT_MS);', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=116, column=12), stop=Location(line=116, column=36))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='if (get_measurement(&measurement) == TRUE && measurement < 10)\n        {\n\n            pulse();\n        }\n', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=119, column=8), stop=Location(line=123, column=10))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='pulse();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=122, column=12), stop=Location(line=122, column=20))))
+2025-10-24 11:04:37.878 | TRACE    | kaskara.clang.analysis:from_dict:132 - loaded statement: ClangStatement(content='reset();', location=FileLocationRange(filename='Src/app/app.c', location_range=LocationRange(start=Location(line=125, column=8), stop=Location(line=125, column=16))))
+2025-10-24 11:04:37.878 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:37.878 | DEBUG    | kaskara.clang.analyser:_find_statements:133 - finished reading results
+2025-10-24 11:04:37.878 | DEBUG    | kaskara.statements:insertions:153 - computing insertion points
+2025-10-24 11:04:37.878 | DEBUG    | kaskara.statements:insertions:164 - computed insertion points
+2025-10-24 11:04:38.027 | DEBUG    | darjeeling.problem:build:85 - using coverage to determine passing and failing tests
+2025-10-24 11:04:38.027 | INFO     | darjeeling.problem:build:93 - determined passing and failing tests
+2025-10-24 11:04:38.027 | INFO     | darjeeling.problem:build:94 - * passing tests: p1, p2, p3, p4, p5, p6, p7, p8, p9
+2025-10-24 11:04:38.027 | INFO     | darjeeling.problem:build:96 - * failing tests: n1
+2025-10-24 11:04:38.027 | INFO     | darjeeling.problem:build:124 - ordering test cases
+2025-10-24 11:04:38.027 | INFO     | darjeeling.problem:build:127 - test order: n1, p1, p2, p3, p4, p5, p6, p7, p8, p9
+2025-10-24 11:04:38.027 | DEBUG    | darjeeling.problem:build:129 - storing contents of source code files
+2025-10-24 11:04:38.490 | DEBUG    | darjeeling.source:for_container:208 - fetched file contents
+2025-10-24 11:04:38.663 | DEBUG    | darjeeling.problem:build:133 - stored contents of source code files
+2025-10-24 11:04:38.664 | INFO     | darjeeling.problem:validate:156 - implicated lines [15]:
+Src/app/app.c: 69..80; 82; 84; 88
+2025-10-24 11:04:38.664 | INFO     | darjeeling.problem:validate:157 - implicated files [1]:
+* Src/app/app.c
+2025-10-24 11:04:38.664 | INFO     | darjeeling.session:from_config:146 - constructing database of donor snippets...
+2025-10-24 11:04:38.664 | DEBUG    | darjeeling.snippet:from_kaskara:158 - constructing snippet database from statements
+2025-10-24 11:04:38.664 | DEBUG    | darjeeling.snippet:from_kaskara:183 - constructed snippet database from snippets
+2025-10-24 11:04:38.664 | DEBUG    | darjeeling.snippet:from_kaskara:184 - snippets:
+ * uint8_t aux_id = PD_Get_AuxID();
+
+ * uint8_t rev_id = PD_Get_RevID();
+
+ * uint8_t id = PD_Get_ID();
+
+ * return (aux_id == 0) && (rev_id == 0) && (id == 9);
+ * interrupts = enable_waiting;
+ * PD_I2c_Init(get_i2c());
+ * PD_Power_Off();
+ * HAL_Delay(10);
+ * PD_Power_On();
+ * while (PD_Get_IntBusy() == ((BOOL)1U))
+{
+}
+
+ * if (check_identifiers() == ((BOOL)0U)) {
+}
+
+ * PD_Initialize_LED();
+ * PD_enable_sleep_after_interrupt();
+ * if (enable_waiting == ((BOOL)1U)) {
+PD_Set_LowThreshold(low_threshold);
+PD_Set_HighThreshold(high_threshold);
+PD_Enable_Interrupt();
+} else {
+PD_Disable_Interrupt();
+}
+
+ * PD_Set_LowThreshold(low_threshold);
+ * PD_Set_HighThreshold(high_threshold);
+ * PD_Enable_Interrupt();
+ * PD_Disable_Interrupt();
+ * PD_Measurement_Enable();
+ * HAL_Delay(500);
+ * reset();
+ * PD_LED_On();
+ * HAL_Delay(100);
+ * PD_LED_Off();
+ * if (PD_Get_Valid() == ((BOOL)1U)) {
+(*data) = PD_Get_Value();
+return ((BOOL)1U);} else {
+return ((BOOL)0U);}
+
+ * (*data) = PD_Get_Value();
+ * return ((BOOL)1U);
+ * return ((BOOL)0U);
+ * if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+ * PD_clear_interrupts();
+ * while ((PD_Get_LowInterrupt() == ((BOOL)0U)) && (PD_Get_HighInterrupt() == ((BOOL)0U)))
+{
+HAL_Delay(1000);
+}
+
+ * HAL_Delay(1000);
+ * uint16_t measurement = 0;
+
+ * device_initialization(((BOOL)1U), 1000, 10000);
+ * while (1)
+{
+if (((BOOL)1U)) {
+wait_for_measurement();
+} else {
+HAL_Delay(100);
+}
+if (get_measurement(&measurement) == ((BOOL)1U) && measurement < 10) {
+pulse();
+}
+reset();
+}
+
+ * if (((BOOL)1U)) {
+wait_for_measurement();
+} else {
+HAL_Delay(100);
+}
+
+ * wait_for_measurement();
+ * if (get_measurement(&measurement) == ((BOOL)1U) && measurement < 10) {
+pulse();
+}
+
+ * pulse();
+2025-10-24 11:04:38.664 | INFO     | darjeeling.session:from_config:152 - constructed database of donor snippets: 39 snippets
+2025-10-24 11:04:38.664 | INFO     | darjeeling.transformation.transformations:build:54 - building transformation database
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.665 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: (*data) = PD_Get_Value();
+2025-10-24 11:04:38.665 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: (*data) = PD_Get_Value();
+2025-10-24 11:04:38.665 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.665 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.665 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (PD_Get_Valid() == ((BOOL)1U)) {
+(*data) = PD_Get_Value();
+return ((BOOL)1U);} else {
+return ((BOOL)0U);}
+
+2025-10-24 11:04:38.665 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:79 - prevented self-replacement of statement [Src/app/app.c@73:4::81:6]
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.666 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.666 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: (*data) = PD_Get_Value();
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:79 - prevented self-replacement of statement [Src/app/app.c@75:8::75:33]
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (PD_Get_Valid() == ((BOOL)1U)) {
+(*data) = PD_Get_Value();
+return ((BOOL)1U);} else {
+return ((BOOL)0U);}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: if (PD_Get_Valid() == ((BOOL)1U)) {
+(*data) = PD_Get_Value();
+return ((BOOL)1U);} else {
+return ((BOOL)0U);}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.666 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: (*data) = PD_Get_Value();
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: (*data) = PD_Get_Value();
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (PD_Get_Valid() == ((BOOL)1U)) {
+(*data) = PD_Get_Value();
+return ((BOOL)1U);} else {
+return ((BOOL)0U);}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: if (PD_Get_Valid() == ((BOOL)1U)) {
+(*data) = PD_Get_Value();
+return ((BOOL)1U);} else {
+return ((BOOL)0U);}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.666 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:79 - prevented self-replacement of statement [Src/app/app.c@76:8::76:20]
+2025-10-24 11:04:38.666 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.666 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.666 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.666 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: (*data) = PD_Get_Value();
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: (*data) = PD_Get_Value();
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (PD_Get_Valid() == ((BOOL)1U)) {
+(*data) = PD_Get_Value();
+return ((BOOL)1U);} else {
+return ((BOOL)0U);}
+
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: if (PD_Get_Valid() == ((BOOL)1U)) {
+(*data) = PD_Get_Value();
+return ((BOOL)1U);} else {
+return ((BOOL)0U);}
+
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:79 - prevented self-replacement of statement [Src/app/app.c@80:8::80:21]
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: PD_clear_interrupts();
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:79 - prevented self-replacement of statement [Src/app/app.c@88:8::88:30]
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: if (interrupts) {
+PD_clear_interrupts();
+} else {
+}
+
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: return ((BOOL)0U);
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:73 - using snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.667 | DEBUG    | darjeeling.transformation.classic.replace:find_all_at_statement:82 - replace with snippet: return ((BOOL)1U);
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.667 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.668 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | DEBUG    | kaskara.statements:__post_init__:99 - indexed statements by file:
+  Src/app/app.c: 42 statements
+2025-10-24 11:04:38.669 | INFO     | darjeeling.transformation.transformations:build:57 - built transformation database (took 0.005 seconds)
+2025-10-24 11:04:38.670 | DEBUG    | darjeeling.searcher.base:__init__:54 - constructing searcher
+2025-10-24 11:04:38.670 | DEBUG    | darjeeling.searcher.base:__init__:68 - constructed searcher
+2025-10-24 11:04:38.670 | INFO     | darjeeling.session:run:193 - beginning search process...
+2025-10-24 11:04:38.670 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:04:38.670 | DEBUG    | darjeeling.searcher.exhaustive:all_single_edit_patches:78 - finding all single-edit patches
+2025-10-24 11:04:38.670 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#45ce8e11>
+2025-10-24 11:04:38.672 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#45ce8e11>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,16 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
+-    if (PD_Get_Valid() == TRUE)
+-    {
+-        (*data) = PD_Get_Value();
+-        return TRUE;
+     }
+-    else
+-    {
+-        return FALSE;
+-    }
+-}
+ 
+ void reset()
+ {
+
+
+2025-10-24 11:04:38.672 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#45ce8e11>
+2025-10-24 11:04:41.721 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:73:5:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   73 |     [01;31m[K}[m[K
+      |     [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:04:41.910 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#45ce8e11>
+2025-10-24 11:04:41.910 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#45ce8e11>
+2025-10-24 11:04:41.911 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:04:41.911 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#2f4f83e1>
+2025-10-24 11:04:41.912 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#2f4f83e1>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,7 +72,7 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
+-        (*data) = PD_Get_Value();
++        
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:04:41.912 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#2f4f83e1>
+2025-10-24 11:04:47.056 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#2f4f83e1>
+2025-10-24 11:04:47.056 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#2f4f83e1>
+2025-10-24 11:04:47.056 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#2f4f83e1>]
+2025-10-24 11:04:52.146 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#2f4f83e1>)
+2025-10-24 11:04:52.325 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#2f4f83e1>
+2025-10-24 11:04:52.326 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:04:52.326 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#38688c91>
+2025-10-24 11:04:52.327 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#38688c91>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,7 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+-        return TRUE;
++        
+     }
+     else
+     {
+
+
+2025-10-24 11:04:52.327 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#38688c91>
+2025-10-24 11:04:55.327 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:82:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   82 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:04:55.497 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#38688c91>
+2025-10-24 11:04:55.498 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#38688c91>
+2025-10-24 11:04:55.498 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:04:55.498 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#1e622630>
+2025-10-24 11:04:55.499 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#1e622630>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,7 +77,7 @@
+     }
+     else
+     {
+-        return FALSE;
++        
+     }
+ }
+ 
+
+
+2025-10-24 11:04:55.499 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#1e622630>
+2025-10-24 11:04:58.393 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:82:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   82 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:04:58.575 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#1e622630>
+2025-10-24 11:04:58.575 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#1e622630>
+2025-10-24 11:04:58.575 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:04:58.575 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#7f011ea9>
+2025-10-24 11:04:58.576 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#7f011ea9>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -85,7 +85,7 @@
+ {
+     if (interrupts)
+     {
+-        PD_clear_interrupts();
++        
+     }
+     else
+     {
+
+
+2025-10-24 11:04:58.576 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#7f011ea9>
+2025-10-24 11:05:03.601 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#7f011ea9>
+2025-10-24 11:05:03.601 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#7f011ea9>
+2025-10-24 11:05:03.601 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#7f011ea9>]
+2025-10-24 11:05:08.705 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#7f011ea9>)
+2025-10-24 11:05:08.887 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#7f011ea9>
+2025-10-24 11:05:08.887 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:05:08.888 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#5c512fd1>
+2025-10-24 11:05:08.888 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#5c512fd1>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,16 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
+-    if (PD_Get_Valid() == TRUE)
+-    {
+-        (*data) = PD_Get_Value();
+-        return TRUE;
+-    }
+-    else
+-    {
+-        return FALSE;
+-    }
+-}
++    (*data) = PD_Get_Value();}
+ 
+ void reset()
+ {
+
+
+2025-10-24 11:05:08.888 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#5c512fd1>
+2025-10-24 11:05:11.878 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:73:30:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   73 |     (*data) = PD_Get_Value();[01;31m[K}[m[K
+      |                              [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:05:12.060 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#5c512fd1>
+2025-10-24 11:05:12.061 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#5c512fd1>
+2025-10-24 11:05:12.061 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:05:12.061 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#38334524>
+2025-10-24 11:05:12.062 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#38334524>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,16 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
+-    if (PD_Get_Valid() == TRUE)
+-    {
+-        (*data) = PD_Get_Value();
+-        return TRUE;
+-    }
+-    else
+-    {
+-        return FALSE;
+-    }
+-}
++    PD_clear_interrupts();}
+ 
+ void reset()
+ {
+
+
+2025-10-24 11:05:12.062 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#38334524>
+2025-10-24 11:05:14.979 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:73:27:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   73 |     PD_clear_interrupts();[01;31m[K}[m[K
+      |                           [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:05:15.160 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#38334524>
+2025-10-24 11:05:15.160 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#38334524>
+2025-10-24 11:05:15.161 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:05:15.161 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#608e5af7>
+2025-10-24 11:05:15.162 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#608e5af7>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,14 +70,9 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
+-    if (PD_Get_Valid() == TRUE)
+-    {
+-        (*data) = PD_Get_Value();
+-        return TRUE;
+-    }
+-    else
+-    {
+-        return FALSE;
++    if (interrupts) {
++    PD_clear_interrupts();
++    } else {
+     }
+ }
+ 
+
+
+2025-10-24 11:05:15.162 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#608e5af7>
+2025-10-24 11:05:18.079 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:77:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   77 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:05:18.235 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#608e5af7>
+2025-10-24 11:05:18.235 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#608e5af7>
+2025-10-24 11:05:18.236 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:05:18.236 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#1a322ffb>
+2025-10-24 11:05:18.237 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#1a322ffb>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,16 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
+-    if (PD_Get_Valid() == TRUE)
+-    {
+-        (*data) = PD_Get_Value();
+-        return TRUE;
+-    }
+-    else
+-    {
+-        return FALSE;
+-    }
+-}
++    return ((BOOL)0U);}
+ 
+ void reset()
+ {
+
+
+2025-10-24 11:05:18.237 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#1a322ffb>
+2025-10-24 11:05:23.328 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#1a322ffb>
+2025-10-24 11:05:23.328 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#1a322ffb>
+2025-10-24 11:05:23.328 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#1a322ffb>]
+2025-10-24 11:05:28.422 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#1a322ffb>)
+2025-10-24 11:05:28.595 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#1a322ffb>
+2025-10-24 11:05:28.596 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:05:28.596 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#4f2ad5fa>
+2025-10-24 11:05:28.597 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#4f2ad5fa>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,16 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
+-    if (PD_Get_Valid() == TRUE)
+-    {
+-        (*data) = PD_Get_Value();
+-        return TRUE;
+-    }
+-    else
+-    {
+-        return FALSE;
+-    }
+-}
++    return ((BOOL)1U);}
+ 
+ void reset()
+ {
+
+
+2025-10-24 11:05:28.597 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#4f2ad5fa>
+2025-10-24 11:05:33.674 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#4f2ad5fa>
+2025-10-24 11:05:33.674 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#4f2ad5fa>
+2025-10-24 11:05:33.674 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#4f2ad5fa>]
+2025-10-24 11:05:38.746 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#4f2ad5fa>)
+2025-10-24 11:05:39.175 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#4f2ad5fa>
+2025-10-24 11:05:39.176 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:05:39.176 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#ce529d2a>
+2025-10-24 11:05:39.176 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#ce529d2a>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,7 +72,7 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
+-        (*data) = PD_Get_Value();
++        PD_clear_interrupts();
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:05:39.176 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#ce529d2a>
+2025-10-24 11:05:44.295 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#ce529d2a>
+2025-10-24 11:05:44.295 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#ce529d2a>
+2025-10-24 11:05:44.295 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#ce529d2a>]
+2025-10-24 11:05:49.384 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#ce529d2a>)
+2025-10-24 11:05:49.626 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#ce529d2a>
+2025-10-24 11:05:49.626 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:05:49.626 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#12acfb7f>
+2025-10-24 11:05:49.628 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#12acfb7f>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,7 +72,11 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
++        if (PD_Get_Valid() == ((BOOL)1U)) {
+         (*data) = PD_Get_Value();
++        return ((BOOL)1U);} else {
++        return ((BOOL)0U);}
++
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:05:49.628 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#12acfb7f>
+2025-10-24 11:05:54.724 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#12acfb7f>
+2025-10-24 11:05:54.724 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#12acfb7f>
+2025-10-24 11:05:54.724 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#12acfb7f>]
+2025-10-24 11:05:59.824 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#12acfb7f>)
+2025-10-24 11:06:00.065 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#12acfb7f>
+2025-10-24 11:06:00.065 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:06:00.065 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#37196efa>
+2025-10-24 11:06:00.066 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#37196efa>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,7 +72,11 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
+-        (*data) = PD_Get_Value();
++        if (interrupts) {
++        PD_clear_interrupts();
++        } else {
++        }
++
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:06:00.066 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#37196efa>
+2025-10-24 11:06:05.132 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#37196efa>
+2025-10-24 11:06:05.132 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#37196efa>
+2025-10-24 11:06:05.132 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#37196efa>]
+2025-10-24 11:06:10.239 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#37196efa>)
+2025-10-24 11:06:10.544 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#37196efa>
+2025-10-24 11:06:10.545 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:06:10.545 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#dff47bf7>
+2025-10-24 11:06:10.546 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#dff47bf7>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,7 +72,7 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
+-        (*data) = PD_Get_Value();
++        return ((BOOL)0U);
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:06:10.547 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#dff47bf7>
+2025-10-24 11:06:15.655 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#dff47bf7>
+2025-10-24 11:06:15.655 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#dff47bf7>
+2025-10-24 11:06:15.655 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#dff47bf7>]
+2025-10-24 11:06:20.745 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#dff47bf7>)
+2025-10-24 11:06:20.937 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#dff47bf7>
+2025-10-24 11:06:20.937 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:06:20.938 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#116a7728>
+2025-10-24 11:06:20.938 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#116a7728>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,7 +72,7 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
+-        (*data) = PD_Get_Value();
++        return ((BOOL)1U);
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:06:20.938 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#116a7728>
+2025-10-24 11:06:26.057 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#116a7728>
+2025-10-24 11:06:26.057 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#116a7728>
+2025-10-24 11:06:26.057 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#116a7728>]
+2025-10-24 11:06:31.153 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#116a7728>)
+2025-10-24 11:06:31.372 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#116a7728>
+2025-10-24 11:06:31.372 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:06:31.373 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#f3305127>
+2025-10-24 11:06:31.373 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#f3305127>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,7 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+-        return TRUE;
++        (*data) = PD_Get_Value();
+     }
+     else
+     {
+
+
+2025-10-24 11:06:31.373 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#f3305127>
+2025-10-24 11:06:34.323 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:82:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   82 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:06:34.492 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#f3305127>
+2025-10-24 11:06:34.492 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#f3305127>
+2025-10-24 11:06:34.492 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:06:34.492 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#716f3646>
+2025-10-24 11:06:34.493 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#716f3646>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,7 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+-        return TRUE;
++        PD_clear_interrupts();
+     }
+     else
+     {
+
+
+2025-10-24 11:06:34.493 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#716f3646>
+2025-10-24 11:06:37.490 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:82:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   82 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:06:37.658 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#716f3646>
+2025-10-24 11:06:37.659 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#716f3646>
+2025-10-24 11:06:37.659 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:06:37.659 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#721d24ea>
+2025-10-24 11:06:37.660 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#721d24ea>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,7 +73,11 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+-        return TRUE;
++        if (PD_Get_Valid() == ((BOOL)1U)) {
++        (*data) = PD_Get_Value();
++        return ((BOOL)1U);} else {
++        return ((BOOL)0U);}
++
+     }
+     else
+     {
+
+
+2025-10-24 11:06:37.660 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#721d24ea>
+2025-10-24 11:06:42.766 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#721d24ea>
+2025-10-24 11:06:42.767 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#721d24ea>
+2025-10-24 11:06:42.767 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#721d24ea>]
+2025-10-24 11:06:47.870 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#721d24ea>)
+2025-10-24 11:06:48.083 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#721d24ea>
+2025-10-24 11:06:48.083 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:06:48.083 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#f750c042>
+2025-10-24 11:06:48.084 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#f750c042>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,7 +73,11 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+-        return TRUE;
++        if (interrupts) {
++        PD_clear_interrupts();
++        } else {
++        }
++
+     }
+     else
+     {
+
+
+2025-10-24 11:06:48.084 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#f750c042>
+2025-10-24 11:06:51.165 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:86:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   86 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:06:51.354 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#f750c042>
+2025-10-24 11:06:51.354 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#f750c042>
+2025-10-24 11:06:51.354 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:06:51.355 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#8516df13>
+2025-10-24 11:06:51.355 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#8516df13>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,7 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+-        return TRUE;
++        return ((BOOL)0U);
+     }
+     else
+     {
+
+
+2025-10-24 11:06:51.356 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#8516df13>
+2025-10-24 11:06:56.595 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#8516df13>
+2025-10-24 11:06:56.595 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#8516df13>
+2025-10-24 11:06:56.595 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#8516df13>]
+2025-10-24 11:07:01.685 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#8516df13>)
+2025-10-24 11:07:01.875 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#8516df13>
+2025-10-24 11:07:01.876 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:01.876 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#17984888>
+2025-10-24 11:07:01.877 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#17984888>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,7 +77,7 @@
+     }
+     else
+     {
+-        return FALSE;
++        (*data) = PD_Get_Value();
+     }
+ }
+ 
+
+
+2025-10-24 11:07:01.877 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#17984888>
+2025-10-24 11:07:04.951 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:82:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   82 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:07:05.133 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#17984888>
+2025-10-24 11:07:05.133 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#17984888>
+2025-10-24 11:07:05.133 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:05.134 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#3ed2d6cb>
+2025-10-24 11:07:05.134 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#3ed2d6cb>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,7 +77,7 @@
+     }
+     else
+     {
+-        return FALSE;
++        PD_clear_interrupts();
+     }
+ }
+ 
+
+
+2025-10-24 11:07:05.134 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#3ed2d6cb>
+2025-10-24 11:07:08.156 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:82:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   82 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:07:08.329 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#3ed2d6cb>
+2025-10-24 11:07:08.329 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#3ed2d6cb>
+2025-10-24 11:07:08.329 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:08.329 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#24a80aba>
+2025-10-24 11:07:08.330 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#24a80aba>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,7 +77,11 @@
+     }
+     else
+     {
+-        return FALSE;
++        if (PD_Get_Valid() == ((BOOL)1U)) {
++        (*data) = PD_Get_Value();
++        return ((BOOL)1U);} else {
++        return ((BOOL)0U);}
++
+     }
+ }
+ 
+
+
+2025-10-24 11:07:08.330 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#24a80aba>
+2025-10-24 11:07:13.552 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#24a80aba>
+2025-10-24 11:07:13.552 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#24a80aba>
+2025-10-24 11:07:13.552 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#24a80aba>]
+2025-10-24 11:07:18.642 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#24a80aba>)
+2025-10-24 11:07:18.831 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#24a80aba>
+2025-10-24 11:07:18.831 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:18.831 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#3e000e2c>
+2025-10-24 11:07:18.832 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#3e000e2c>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,7 +77,11 @@
+     }
+     else
+     {
+-        return FALSE;
++        if (interrupts) {
++        PD_clear_interrupts();
++        } else {
++        }
++
+     }
+ }
+ 
+
+
+2025-10-24 11:07:18.832 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#3e000e2c>
+2025-10-24 11:07:21.832 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kget_measurement[m[K':
+[01m[K/source/Src/app/app.c:86:1:[m[K [01;31m[Kerror: [m[Kcontrol reaches end of non-void function [[01;31m[K-Werror=return-type[m[K]
+   86 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:07:21.996 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#3e000e2c>
+2025-10-24 11:07:21.996 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#3e000e2c>
+2025-10-24 11:07:21.996 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:21.996 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#290732a7>
+2025-10-24 11:07:21.996 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#290732a7>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,7 +77,7 @@
+     }
+     else
+     {
+-        return FALSE;
++        return ((BOOL)1U);
+     }
+ }
+ 
+
+
+2025-10-24 11:07:21.996 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#290732a7>
+2025-10-24 11:07:27.300 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#290732a7>
+2025-10-24 11:07:27.300 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#290732a7>
+2025-10-24 11:07:27.301 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#290732a7>]
+2025-10-24 11:07:32.413 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#290732a7>)
+2025-10-24 11:07:32.595 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#290732a7>
+2025-10-24 11:07:32.596 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:32.596 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#1cde76e4>
+2025-10-24 11:07:32.596 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#1cde76e4>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -85,7 +85,11 @@
+ {
+     if (interrupts)
+     {
++        if (interrupts) {
+         PD_clear_interrupts();
++        } else {
++        }
++
+     }
+     else
+     {
+
+
+2025-10-24 11:07:32.596 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#1cde76e4>
+2025-10-24 11:07:37.831 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#1cde76e4>
+2025-10-24 11:07:37.831 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#1cde76e4>
+2025-10-24 11:07:37.832 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#1cde76e4>]
+2025-10-24 11:07:42.933 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#1cde76e4>)
+2025-10-24 11:07:43.127 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#1cde76e4>
+2025-10-24 11:07:43.128 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:43.128 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#71f3620f>
+2025-10-24 11:07:43.129 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#71f3620f>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -85,7 +85,7 @@
+ {
+     if (interrupts)
+     {
+-        PD_clear_interrupts();
++        return ((BOOL)0U);
+     }
+     else
+     {
+
+
+2025-10-24 11:07:43.129 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#71f3620f>
+2025-10-24 11:07:46.158 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kreset[m[K':
+[01m[K/source/Src/app/app.c:88:16:[m[K [01;31m[Kerror: [m[K'[01m[Kreturn[m[K' with a value, in function returning void [[01;31m[K-Werror=return-type[m[K]
+   88 |         return [01;31m[K([m[K(BOOL)0U);
+      |                [01;31m[K^[m[K
+[01m[K/source/Src/app/app.c:84:6:[m[K [01;36m[Knote: [m[Kdeclared here
+   84 | void [01;36m[Kreset[m[K()
+      |      [01;36m[K^~~~~[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:07:46.339 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#71f3620f>
+2025-10-24 11:07:46.339 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#71f3620f>
+2025-10-24 11:07:46.339 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:46.339 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#17049505>
+2025-10-24 11:07:46.339 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#17049505>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -85,7 +85,7 @@
+ {
+     if (interrupts)
+     {
+-        PD_clear_interrupts();
++        return ((BOOL)1U);
+     }
+     else
+     {
+
+
+2025-10-24 11:07:46.339 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#17049505>
+2025-10-24 11:07:49.360 | TRACE    | darjeeling.build_instructions:execute:79 - build output: [  2%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Src/system/system_stm32wb0x.c.obj[0m
+[  5%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_cortex.c.obj[0m
+[  7%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc.c.obj[0m
+[ 10%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_rcc_ex.c.obj[0m
+[ 12%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash.c.obj[0m
+[ 15%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_flash_ex.c.obj[0m
+[ 17%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_gpio.c.obj[0m
+[ 20%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_dma.c.obj[0m
+[ 22%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr.c.obj[0m
+[ 25%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_pwr_ex.c.obj[0m
+[ 27%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal.c.obj[0m
+[ 30%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c.c.obj[0m
+[ 32%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_i2c_ex.c.obj[0m
+[ 35%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart.c.obj[0m
+[ 37%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32WB0x_HAL_Driver/Src/stm32wb0x_hal_uart_ex.c.obj[0m
+[ 40%] [32mBuilding C object cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/BSP/STM32WB0x-nucleo/stm32wb0x_nucleo.c.obj[0m
+[ 40%] Built target STM32_Drivers
+[ 42%] [32mBuilding C object CMakeFiles/P3.dir/Src/main.c.obj[0m
+[ 45%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_it.c.obj[0m
+[ 47%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/stm32wb0x_hal_msp.c.obj[0m
+[ 50%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/sysmem.c.obj[0m
+[ 52%] [32mBuilding C object CMakeFiles/P3.dir/Src/system/syscalls.c.obj[0m
+[ 55%] [32mBuilding ASM object CMakeFiles/P3.dir/startup_stm32wb05.s.obj[0m
+[ 57%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/serial.c.obj[0m
+[ 60%] [32mBuilding C object CMakeFiles/P3.dir/Src/utils/test_harness.c.obj[0m
+[ 62%] [32mBuilding C object CMakeFiles/P3.dir/Src/app/app.c.obj[0m
+[01m[K/source/Src/app/app.c:[m[K In function '[01m[Kreset[m[K':
+[01m[K/source/Src/app/app.c:88:16:[m[K [01;31m[Kerror: [m[K'[01m[Kreturn[m[K' with a value, in function returning void [[01;31m[K-Werror=return-type[m[K]
+   88 |         return [01;31m[K([m[K(BOOL)1U);
+      |                [01;31m[K^[m[K
+[01m[K/source/Src/app/app.c:84:6:[m[K [01;36m[Knote: [m[Kdeclared here
+   84 | void [01;36m[Kreset[m[K()
+      |      [01;36m[K^~~~~[m[K
+cc1: all warnings being treated as errors
+gmake[2]: *** [CMakeFiles/P3.dir/build.make:187: CMakeFiles/P3.dir/Src/app/app.c.obj] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:102: CMakeFiles/P3.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2
+2025-10-24 11:07:49.521 | DEBUG    | darjeeling.evaluator:_evaluate:266 - failed to build candidate: Candidate<#17049505>
+2025-10-24 11:07:49.521 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#17049505>
+2025-10-24 11:07:49.521 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:07:49.521 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#278023c9>
+2025-10-24 11:07:49.521 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#278023c9>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,6 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
++    (*data) = PD_Get_Value();
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+
+
+2025-10-24 11:07:49.521 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#278023c9>
+2025-10-24 11:07:54.819 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#278023c9>
+2025-10-24 11:07:54.819 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#278023c9>
+2025-10-24 11:07:54.819 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#278023c9>]
+2025-10-24 11:07:59.910 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#278023c9>)
+2025-10-24 11:08:00.101 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#278023c9>
+2025-10-24 11:08:00.102 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:08:00.102 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#705c7a08>
+2025-10-24 11:08:00.103 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#705c7a08>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,6 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
++    PD_clear_interrupts();
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+
+
+2025-10-24 11:08:00.103 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#705c7a08>
+2025-10-24 11:08:05.175 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#705c7a08>
+2025-10-24 11:08:05.176 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#705c7a08>
+2025-10-24 11:08:05.176 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#705c7a08>]
+2025-10-24 11:08:10.257 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#705c7a08>)
+2025-10-24 11:08:10.460 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#705c7a08>
+2025-10-24 11:08:10.461 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:08:10.461 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#60152fce>
+2025-10-24 11:08:10.461 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#60152fce>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,6 +70,11 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
++    if (PD_Get_Valid() == ((BOOL)1U)) {
++    (*data) = PD_Get_Value();
++    return ((BOOL)1U);} else {
++    return ((BOOL)0U);}
++
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+
+
+2025-10-24 11:08:10.461 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#60152fce>
+2025-10-24 11:08:15.777 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#60152fce>
+2025-10-24 11:08:15.777 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#60152fce>
+2025-10-24 11:08:15.777 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#60152fce>]
+2025-10-24 11:08:20.876 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#60152fce>)
+2025-10-24 11:08:21.060 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#60152fce>
+2025-10-24 11:08:21.061 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:08:21.061 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#462834e0>
+2025-10-24 11:08:21.062 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#462834e0>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,6 +70,11 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
++    if (interrupts) {
++    PD_clear_interrupts();
++    } else {
++    }
++
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+
+
+2025-10-24 11:08:21.062 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#462834e0>
+2025-10-24 11:08:26.332 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#462834e0>
+2025-10-24 11:08:26.332 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#462834e0>
+2025-10-24 11:08:26.332 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#462834e0>]
+2025-10-24 11:08:31.408 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#462834e0>)
+2025-10-24 11:08:31.618 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#462834e0>
+2025-10-24 11:08:31.619 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:08:31.619 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#2b05f22a>
+2025-10-24 11:08:31.620 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#2b05f22a>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,6 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
++    return ((BOOL)0U);
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+
+
+2025-10-24 11:08:31.620 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#2b05f22a>
+2025-10-24 11:08:36.823 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#2b05f22a>
+2025-10-24 11:08:36.823 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#2b05f22a>
+2025-10-24 11:08:36.823 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#2b05f22a>]
+2025-10-24 11:08:41.916 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#2b05f22a>)
+2025-10-24 11:08:42.108 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#2b05f22a>
+2025-10-24 11:08:42.108 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:08:42.108 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#5bb607e0>
+2025-10-24 11:08:42.109 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#5bb607e0>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -70,6 +70,7 @@
+ 
+ BOOL get_measurement(uint16_t *data)
+ {
++    return ((BOOL)1U);
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
+
+
+2025-10-24 11:08:42.110 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#5bb607e0>
+2025-10-24 11:08:47.340 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#5bb607e0>
+2025-10-24 11:08:47.341 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#5bb607e0>
+2025-10-24 11:08:47.341 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#5bb607e0>]
+2025-10-24 11:08:52.439 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#5bb607e0>)
+2025-10-24 11:08:52.631 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#5bb607e0>
+2025-10-24 11:08:52.631 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:08:52.631 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#4fb19b85>
+2025-10-24 11:08:52.632 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#4fb19b85>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,6 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
++        (*data) = PD_Get_Value();
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:08:52.632 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#4fb19b85>
+2025-10-24 11:08:57.857 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#4fb19b85>
+2025-10-24 11:08:57.858 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#4fb19b85>
+2025-10-24 11:08:57.858 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#4fb19b85>]
+2025-10-24 11:09:02.954 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#4fb19b85>)
+2025-10-24 11:09:03.173 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#4fb19b85>
+2025-10-24 11:09:03.174 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:09:03.174 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#274b4fe9>
+2025-10-24 11:09:03.174 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#274b4fe9>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,6 +72,7 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
++        PD_clear_interrupts();
+         (*data) = PD_Get_Value();
+         return TRUE;
+     }
+
+
+2025-10-24 11:09:03.175 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#274b4fe9>
+2025-10-24 11:09:08.315 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#274b4fe9>
+2025-10-24 11:09:08.315 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#274b4fe9>
+2025-10-24 11:09:08.315 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#274b4fe9>]
+2025-10-24 11:09:13.404 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#274b4fe9>)
+2025-10-24 11:09:13.606 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#274b4fe9>
+2025-10-24 11:09:13.606 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:09:13.606 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#843063f6>
+2025-10-24 11:09:13.607 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#843063f6>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,6 +72,11 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
++        if (PD_Get_Valid() == ((BOOL)1U)) {
++        (*data) = PD_Get_Value();
++        return ((BOOL)1U);} else {
++        return ((BOOL)0U);}
++
+         (*data) = PD_Get_Value();
+         return TRUE;
+     }
+
+
+2025-10-24 11:09:13.607 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#843063f6>
+2025-10-24 11:09:18.753 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#843063f6>
+2025-10-24 11:09:18.753 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#843063f6>
+2025-10-24 11:09:18.753 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#843063f6>]
+2025-10-24 11:09:23.834 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#843063f6>)
+2025-10-24 11:09:24.023 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#843063f6>
+2025-10-24 11:09:24.023 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:09:24.023 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#517f9511>
+2025-10-24 11:09:24.024 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#517f9511>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,6 +72,11 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
++        if (interrupts) {
++        PD_clear_interrupts();
++        } else {
++        }
++
+         (*data) = PD_Get_Value();
+         return TRUE;
+     }
+
+
+2025-10-24 11:09:24.024 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#517f9511>
+2025-10-24 11:09:29.236 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#517f9511>
+2025-10-24 11:09:29.236 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#517f9511>
+2025-10-24 11:09:29.236 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#517f9511>]
+2025-10-24 11:09:34.331 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#517f9511>)
+2025-10-24 11:09:34.482 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#517f9511>
+2025-10-24 11:09:34.483 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:09:34.483 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#c66de56f>
+2025-10-24 11:09:34.483 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#c66de56f>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,6 +72,7 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
++        return ((BOOL)0U);
+         (*data) = PD_Get_Value();
+         return TRUE;
+     }
+
+
+2025-10-24 11:09:34.483 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#c66de56f>
+2025-10-24 11:09:39.717 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#c66de56f>
+2025-10-24 11:09:39.718 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#c66de56f>
+2025-10-24 11:09:39.718 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#c66de56f>]
+2025-10-24 11:09:44.811 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#c66de56f>)
+2025-10-24 11:09:45.006 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#c66de56f>
+2025-10-24 11:09:45.006 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:09:45.007 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#55d33e72>
+2025-10-24 11:09:45.007 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#55d33e72>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -72,6 +72,7 @@
+ {
+     if (PD_Get_Valid() == TRUE)
+     {
++        return ((BOOL)1U);
+         (*data) = PD_Get_Value();
+         return TRUE;
+     }
+
+
+2025-10-24 11:09:45.007 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#55d33e72>
+2025-10-24 11:09:50.286 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#55d33e72>
+2025-10-24 11:09:50.286 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#55d33e72>
+2025-10-24 11:09:50.287 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#55d33e72>]
+2025-10-24 11:09:55.380 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#55d33e72>)
+2025-10-24 11:09:55.604 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#55d33e72>
+2025-10-24 11:09:55.605 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:09:55.605 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#1aed54c0>
+2025-10-24 11:09:55.606 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#1aed54c0>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,6 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
++        (*data) = PD_Get_Value();
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:09:55.607 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#1aed54c0>
+2025-10-24 11:10:00.631 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#1aed54c0>
+2025-10-24 11:10:00.631 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#1aed54c0>
+2025-10-24 11:10:00.632 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#1aed54c0>]
+2025-10-24 11:10:05.716 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#1aed54c0>)
+2025-10-24 11:10:05.903 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#1aed54c0>
+2025-10-24 11:10:05.904 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:10:05.904 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#16ae40d7>
+2025-10-24 11:10:05.904 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#16ae40d7>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,6 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
++        PD_clear_interrupts();
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:10:05.904 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#16ae40d7>
+2025-10-24 11:10:10.992 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#16ae40d7>
+2025-10-24 11:10:10.992 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#16ae40d7>
+2025-10-24 11:10:10.993 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#16ae40d7>]
+2025-10-24 11:10:16.064 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#16ae40d7>)
+2025-10-24 11:10:16.251 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#16ae40d7>
+2025-10-24 11:10:16.252 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:10:16.252 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#c10e0869>
+2025-10-24 11:10:16.252 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#c10e0869>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,6 +73,11 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
++        if (PD_Get_Valid() == ((BOOL)1U)) {
++        (*data) = PD_Get_Value();
++        return ((BOOL)1U);} else {
++        return ((BOOL)0U);}
++
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:10:16.252 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#c10e0869>
+2025-10-24 11:10:21.391 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#c10e0869>
+2025-10-24 11:10:21.391 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#c10e0869>
+2025-10-24 11:10:21.391 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#c10e0869>]
+2025-10-24 11:10:26.462 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#c10e0869>)
+2025-10-24 11:10:26.656 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#c10e0869>
+2025-10-24 11:10:26.656 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:10:26.656 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#53e03eb7>
+2025-10-24 11:10:26.657 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#53e03eb7>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,6 +73,11 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
++        if (interrupts) {
++        PD_clear_interrupts();
++        } else {
++        }
++
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:10:26.657 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#53e03eb7>
+2025-10-24 11:10:31.736 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#53e03eb7>
+2025-10-24 11:10:31.736 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#53e03eb7>
+2025-10-24 11:10:31.736 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#53e03eb7>]
+2025-10-24 11:10:36.837 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#53e03eb7>)
+2025-10-24 11:10:37.026 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#53e03eb7>
+2025-10-24 11:10:37.026 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:10:37.027 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#28fe5d1d>
+2025-10-24 11:10:37.027 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#28fe5d1d>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,6 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
++        return ((BOOL)0U);
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:10:37.027 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#28fe5d1d>
+2025-10-24 11:10:42.131 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#28fe5d1d>
+2025-10-24 11:10:42.131 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#28fe5d1d>
+2025-10-24 11:10:42.131 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#28fe5d1d>]
+2025-10-24 11:10:47.207 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#28fe5d1d>)
+2025-10-24 11:10:47.394 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#28fe5d1d>
+2025-10-24 11:10:47.394 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:10:47.394 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#35586223>
+2025-10-24 11:10:47.395 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#35586223>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -73,6 +73,7 @@
+     if (PD_Get_Valid() == TRUE)
+     {
+         (*data) = PD_Get_Value();
++        return ((BOOL)1U);
+         return TRUE;
+     }
+     else
+
+
+2025-10-24 11:10:47.396 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#35586223>
+2025-10-24 11:10:52.561 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#35586223>
+2025-10-24 11:10:52.561 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#35586223>
+2025-10-24 11:10:52.561 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#35586223>]
+2025-10-24 11:10:57.661 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#35586223>)
+2025-10-24 11:10:57.937 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#35586223>
+2025-10-24 11:10:57.937 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:10:57.937 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#6d7be171>
+2025-10-24 11:10:57.938 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#6d7be171>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,6 +77,7 @@
+     }
+     else
+     {
++        (*data) = PD_Get_Value();
+         return FALSE;
+     }
+ }
+
+
+2025-10-24 11:10:57.938 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#6d7be171>
+2025-10-24 11:11:03.009 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#6d7be171>
+2025-10-24 11:11:03.009 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#6d7be171>
+2025-10-24 11:11:03.009 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#6d7be171>]
+2025-10-24 11:11:08.094 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#6d7be171>)
+2025-10-24 11:11:08.293 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#6d7be171>
+2025-10-24 11:11:08.294 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:11:08.294 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#132659e7>
+2025-10-24 11:11:08.295 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#132659e7>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,6 +77,7 @@
+     }
+     else
+     {
++        PD_clear_interrupts();
+         return FALSE;
+     }
+ }
+
+
+2025-10-24 11:11:08.295 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#132659e7>
+2025-10-24 11:11:13.513 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#132659e7>
+2025-10-24 11:11:13.513 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#132659e7>
+2025-10-24 11:11:13.513 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#132659e7>]
+2025-10-24 11:11:18.614 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#132659e7>)
+2025-10-24 11:11:18.813 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#132659e7>
+2025-10-24 11:11:18.813 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:11:18.813 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#a41e4a3a>
+2025-10-24 11:11:18.813 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#a41e4a3a>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,6 +77,11 @@
+     }
+     else
+     {
++        if (PD_Get_Valid() == ((BOOL)1U)) {
++        (*data) = PD_Get_Value();
++        return ((BOOL)1U);} else {
++        return ((BOOL)0U);}
++
+         return FALSE;
+     }
+ }
+
+
+2025-10-24 11:11:18.813 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#a41e4a3a>
+2025-10-24 11:11:23.711 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#a41e4a3a>
+2025-10-24 11:11:23.711 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#a41e4a3a>
+2025-10-24 11:11:23.712 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#a41e4a3a>]
+2025-10-24 11:11:28.799 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#a41e4a3a>)
+2025-10-24 11:11:28.988 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#a41e4a3a>
+2025-10-24 11:11:28.988 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:11:28.988 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#4ed3d05b>
+2025-10-24 11:11:28.988 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#4ed3d05b>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,6 +77,11 @@
+     }
+     else
+     {
++        if (interrupts) {
++        PD_clear_interrupts();
++        } else {
++        }
++
+         return FALSE;
+     }
+ }
+
+
+2025-10-24 11:11:28.988 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#4ed3d05b>
+2025-10-24 11:11:34.120 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#4ed3d05b>
+2025-10-24 11:11:34.120 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#4ed3d05b>
+2025-10-24 11:11:34.120 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#4ed3d05b>]
+2025-10-24 11:11:39.221 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#4ed3d05b>)
+2025-10-24 11:11:39.434 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#4ed3d05b>
+2025-10-24 11:11:39.434 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:11:39.434 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#69e760a8>
+2025-10-24 11:11:39.435 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#69e760a8>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,6 +77,7 @@
+     }
+     else
+     {
++        return ((BOOL)0U);
+         return FALSE;
+     }
+ }
+
+
+2025-10-24 11:11:39.435 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#69e760a8>
+2025-10-24 11:11:44.657 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#69e760a8>
+2025-10-24 11:11:44.657 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#69e760a8>
+2025-10-24 11:11:44.657 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#69e760a8>]
+2025-10-24 11:11:49.748 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#69e760a8>)
+2025-10-24 11:11:49.949 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#69e760a8>
+2025-10-24 11:11:49.950 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:11:49.950 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#ea10c918>
+2025-10-24 11:11:49.951 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#ea10c918>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -77,6 +77,7 @@
+     }
+     else
+     {
++        return ((BOOL)1U);
+         return FALSE;
+     }
+ }
+
+
+2025-10-24 11:11:49.951 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#ea10c918>
+2025-10-24 11:11:55.196 | DEBUG    | darjeeling.evaluator:_evaluate:238 - built candidate: Candidate<#ea10c918>
+2025-10-24 11:11:55.196 | DEBUG    | darjeeling.evaluator:_evaluate:239 - executing tests for candidate: Candidate<#ea10c918>
+2025-10-24 11:11:55.196 | DEBUG    | darjeeling.evaluator:_run_test:153 - executing test: n1 [Candidate<#ea10c918>]
+2025-10-24 11:12:00.277 | DEBUG    | darjeeling.evaluator:_run_test:174 - * test failed: n1 (Candidate<#ea10c918>)
+2025-10-24 11:12:00.480 | INFO     | darjeeling.evaluator:_evaluate:277 - evaluated candidate: Candidate<#ea10c918>
+2025-10-24 11:12:00.480 | DEBUG    | darjeeling.searcher.exhaustive:_generate:85 - generating candidate patch...
+2025-10-24 11:12:00.481 | DEBUG    | darjeeling.searcher.exhaustive:_generate:87 - generated candidate patch: Candidate<#2a3bb889>
+2025-10-24 11:12:00.482 | INFO     | darjeeling.evaluator:_evaluate:183 - evaluating candidate: Candidate<#2a3bb889>
+--- Src/app/app.c
++++ Src/app/app.c
+@@ -86,6 +86,7 @@
+     if (interrupts)
+     {
+         PD_clear_interrupts();
++        PD_clear_interrupts();
+     }
+     else
+     {
+
+
+2025-10-24 11:12:00.482 | DEBUG    | darjeeling.evaluator:_evaluate:230 - building candidate: Candidate<#2a3bb889>

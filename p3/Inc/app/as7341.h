@@ -40,4 +40,8 @@ uint16_t PD_Get_LowThreshold();
 uint16_t PD_Get_HighThreshold();
 
 uint16_t PD_Get_Value();
+void PD_enable_sleep_after_interrupt();
+void PD_disable_sleep_after_interrupt();
+void PD_clear_interrupts();
+void PD_clear_sleep_after_interrupt();
 #endif

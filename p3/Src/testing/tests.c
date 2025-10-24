@@ -7,11 +7,13 @@
 
 #define COUNTOF(__BUFFER__) (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
 
+// P1
 TestResult baseline_test()
 {
     return PASS;
 }
 
+// P2
 TestResult i2c_initialization_test()
 {
     if (HAL_I2C_IsDeviceReady(get_i2c(), PD_DEVICE_ADDR, 3, 1000) == HAL_OK)
@@ -24,6 +26,7 @@ TestResult i2c_initialization_test()
     }
 }
 
+// P3
 TestResult device_talk_test()
 {
     PD_I2c_Init(get_i2c());
@@ -38,6 +41,7 @@ TestResult device_talk_test()
     }
 }
 
+// P4
 TestResult device_initialization_nowait_test()
 {
     device_initialization(FALSE, 0x10, 0x100);
@@ -68,6 +72,7 @@ TestResult device_initialization_nowait_test()
     return PASS;
 }
 
+// P5
 TestResult device_initialization_wait_test()
 {
     device_initialization(TRUE, 0x10, 0x100);
@@ -98,15 +103,17 @@ TestResult device_initialization_wait_test()
     return PASS;
 }
 
+// P6
 TestResult measurement_test()
 {
+    uint16_t measurement = 0;
     device_initialization(FALSE, 0, 0);
 
     // Minor delay before taking measurement
-    uint16_t measurement = get_measurement(TRUE);
+    BOOL valid = get_measurement(&measurement);
 
     // Unless the device is in a pitch-black room, there should always be some level of measurement
-    if (measurement > 0)
+    if (valid && measurement > 0)
     {
         return PASS;
     }
@@ -116,13 +123,16 @@ TestResult measurement_test()
     }
 }
 
+// P7
 TestResult interrupt_test()
 {
+    uint16_t measurement = 0;
+
     device_initialization(TRUE, 100, 1000);
     wait_for_measurement();
 
-    uint16_t measurement = get_measurement(TRUE);
-    if (measurement > 0)
+    BOOL valid = get_measurement(&measurement);
+    if (valid && measurement > 0)
     {
         return PASS;
     }
@@ -132,6 +142,7 @@ TestResult interrupt_test()
     }
 }
 
+// P8
 TestResult pulse_test()
 {
     device_initialization(FALSE, 0, 0);
@@ -141,22 +152,49 @@ TestResult pulse_test()
     return PASS;
 }
 
-TestResult measurement_test_nodelay()
+// P9
+TestResult repeated_interrupt_test()
 {
+    uint16_t measurement = (uint16_t)-1;
+
+    device_initialization(TRUE, 100, 1000);
+
+    for (int i = 0; i < 5; i++)
+    {
+        wait_for_measurement();
+        BOOL valid = get_measurement(&measurement);
+        if (!valid || measurement == (uint16_t)-1)
+        {
+            return FAIL;
+        }
+        HAL_Delay(100);
+        reset();
+        measurement = (uint16_t)-1;
+    }
+
+    return PASS;
+}
+
+// N1
+TestResult repeated_measurement_test()
+{
+    uint16_t measurement = (uint16_t)-1;
+
     device_initialization(FALSE, 0, 0);
 
-    // Immediately take measurement
-    uint16_t measurement = get_measurement(FALSE);
+    for (int i = 0; i < 5; i++)
+    {
+        BOOL valid = get_measurement(&measurement);
+        if (!valid || measurement == (uint16_t)-1)
+        {
+            return FAIL;
+        }
+        HAL_Delay(100);
+        reset();
+        measurement = (uint16_t)-1;
+    }
 
-    // Unless the device is in a pitch-black room, there should always be some level of measurement
-    if (measurement > 0)
-    {
-        return PASS;
-    }
-    else
-    {
-        return FAIL;
-    }
+    return PASS;
 }
 
 TestCase test_cases[] = {
@@ -168,6 +206,6 @@ TestCase test_cases[] = {
     measurement_test,
     interrupt_test,
     pulse_test,
-    measurement_test_nodelay,
-};
+    repeated_interrupt_test,
+    repeated_measurement_test};
 int num_cases = COUNTOF(test_cases);

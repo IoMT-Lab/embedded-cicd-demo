@@ -5,11 +5,13 @@
 #include "stm32wb0x_nucleo.h"
 #include "utils/serial.h"
 
-#define POLL_WAIT_MS 5000
+#define POLL_WAIT_MS 100
 #define INTERRUPT_WAIT_MS 1000
 #define LOW_THRESHOLD 1000
 #define HIGH_THRESHOLD 10000
-#define ENABLE_WAITING TRUE
+#define ENABLE_WAITING FALSE
+
+BOOL interrupts = FALSE;
 
 BOOL check_identifiers()
 {
@@ -22,7 +24,11 @@ BOOL check_identifiers()
 
 void device_initialization(BOOL enable_waiting, uint16_t low_threshold, uint16_t high_threshold)
 {
+    interrupts = enable_waiting;
+
     PD_I2c_Init(get_i2c());
+    PD_Power_Off();
+    HAL_Delay(10);
     PD_Power_On();
 
     // Wait for device to say it is ready
@@ -36,6 +42,7 @@ void device_initialization(BOOL enable_waiting, uint16_t low_threshold, uint16_t
     }
 
     PD_Initialize_LED();
+    PD_enable_sleep_after_interrupt();
 
     if (enable_waiting == TRUE)
     {
@@ -49,36 +56,45 @@ void device_initialization(BOOL enable_waiting, uint16_t low_threshold, uint16_t
     }
 
     PD_Measurement_Enable();
+    HAL_Delay(500);
+
+    reset();
 }
 
 void pulse()
 {
     PD_LED_On();
-    HAL_Delay(500);
+    HAL_Delay(100);
     PD_LED_Off();
 }
 
-uint16_t get_measurement(BOOL should_delay)
+BOOL get_measurement(uint16_t *data)
 {
-    if (should_delay == TRUE)
-    {
-        HAL_Delay(100);
-    }
-
     if (PD_Get_Valid() == TRUE)
     {
-        return PD_Get_Value();
+        (*data) = PD_Get_Value();
+        return TRUE;
     }
     else
     {
-        return 0;
+        return FALSE;
     }
 }
 
-void wait_for_measurement()
+void reset()
 {
-    HAL_Delay(INTERRUPT_WAIT_MS);
+    if (interrupts)
+    {
+        PD_clear_interrupts();
+    }
+    else
+    {
+    }
+}
 
+void wait_for_measurement(void)
+{
+    HAL_Delay(10);
     while ((PD_Get_LowInterrupt() == FALSE) && (PD_Get_HighInterrupt() == FALSE))
     {
         HAL_Delay(INTERRUPT_WAIT_MS);
@@ -87,6 +103,7 @@ void wait_for_measurement()
 
 void App()
 {
+    uint16_t measurement = 0;
     device_initialization(ENABLE_WAITING, LOW_THRESHOLD, HIGH_THRESHOLD);
     while (1)
     {
@@ -99,9 +116,12 @@ void App()
             HAL_Delay(POLL_WAIT_MS);
         }
 
-        if (get_measurement(TRUE) > 0)
+        if (get_measurement(&measurement) == TRUE && measurement < 10)
         {
+
             pulse();
         }
+
+        reset();
     }
 }
